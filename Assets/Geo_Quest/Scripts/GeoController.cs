@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 
 public class GeoController : MonoBehaviour
@@ -13,8 +14,8 @@ public class GeoController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+   private void Update()
     {
-        
+    if (Input.GetKeyUp(KeyCode.W)) {
     }
-}
+}       Transform.position += new Vector3(0,  1,  0);
