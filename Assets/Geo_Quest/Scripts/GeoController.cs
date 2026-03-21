@@ -1,74 +1,83 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 using UnityEngine.SceneManagement;
+
+
 public class GeoController : MonoBehaviour
 {
-    Rigidbody2D RB;
-    string rubix = "Hello guys";
-    public float speed;
-    public string nextlevel = "level 2";
+    SpriteRenderer spriteRenderer;
+    
+    private Rigidbody2D rb;
+    string jaroobed = "bankai";
+    int counter = 1;
+    public float Speed;
+    public string NextLevel = "Level2";
     // Start is called before the first frame update
     void Start()
-    {RB= GetComponent<Rigidbody2D>();
-        Debug.Log("Hello Wold");
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        Debug.Log("hasdasd");
     }
 
     // Update is called once per frame
-    private void Update() {
+    private void Update()
+    {
 
-        float xInput = Input.GetAxis("Horizontal");
-      
-        RB.velocity = new Vector2 (xInput * speed, RB.velocity.y);  
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Debug.Log("did something");
+            spriteRenderer.color = Color.cyan;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Debug.Log("did something");
+            spriteRenderer.color = Color.grey;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Debug.Log("did something");
+            spriteRenderer.color = Color.red;
+        }
+        float horizontalInput = Input.GetAxis("Horizontal");
+
+        rb.velocity = new Vector2(horizontalInput * Speed  , rb.velocity.y);
         /*
-        if (Input.GetKeyUp(KeyCode.W))
-        {
-
-            transform.position += new Vector3(0, 1, 0);
-        }
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-
-            transform.position += new Vector3(-1, 0, 0);
-        }
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-
-            transform.position += new Vector3(0, -1, 0);
-        }
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-
-            transform.position += new Vector3(1, 0, 0);
-        }
-    */
-
+        Debug.Log(counter);
+        counter++;
+        if (Input.GetKeyDown(KeyCode.W)) ;
+        transform.position += new Vector3(0, 1, 0);
+        */
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("hit");
-        switch (collision.tag)
+        switch (collision.gameObject.tag)
         {
             case "Death":
-                string levelname = SceneManager.GetActiveScene().name;
-                SceneManager.LoadScene(levelname);
-                Debug.Log("You died");
-                break;
-            case "Coin":
-                Debug.Log("+1");
-                break;
+                {
+                    string levelName = SceneManager.GetActiveScene().name;
+                    Debug.Log("player has reahed death");
+                    SceneManager.LoadScene(levelName);
+                    break;
+                }
+
             case "Finish":
-
-                SceneManager.LoadScene(nextlevel);
-                break;
+                {
+                    SceneManager.LoadScene(NextLevel);
+                    break;
+                }
         }
-
     }
+          private SpriteRenderer sr;
+
+
+} 
     
-
-
-}
+          
